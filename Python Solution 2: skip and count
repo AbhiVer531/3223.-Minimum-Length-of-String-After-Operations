@@ -1,0 +1,10 @@
+class Solution:
+    def minimumLength(self, s: str) -> int:
+        from collections import Counter
+        char_counter = Counter(s)
+        sum = 0
+        for char, freq in char_counter.items():
+            while freq > 2:
+                freq = freq - 2
+            sum = sum + freq
+        return sum
