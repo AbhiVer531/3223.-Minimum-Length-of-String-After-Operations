@@ -1,0 +1,25 @@
+class Solution:
+    def minimumLength(self, s: str) -> int:
+        from collections import Counter
+        char_counter = Counter(s)
+        s = list(s)
+        for char, freq in char_counter.items():
+            while freq > 2:
+                left = None
+                right = None
+                for i in range(len(s)):
+                    if s[i] == char:
+                        left = i
+                        break
+                for j in range(len(s) - 1, -1, -1):
+                    if s[j] == char:
+                        right = j
+                        break
+                if left is not None and right is not None and left < right:
+                    s[left] = "#"
+                    s[right] = "#"
+                    freq -= 2
+                else:
+                    break
+        result = [ch for ch in s if ch != "#"]
+        return len(result)
